@@ -1,0 +1,24 @@
+# Makefile for compiling the MST project
+
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
+
+all: main
+
+main: main.o Graph.o DisjointSet.o Edge.o
+	$(CXX) $(CXXFLAGS) -o main main.o Graph.o DisjointSet.o Edge.o
+
+main.o: main.cpp Graph.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+Graph.o: Graph.cpp Graph.h DisjointSet.h Edge.h
+	$(CXX) $(CXXFLAGS) -c Graph.cpp
+
+DisjointSet.o: DisjointSet.cpp DisjointSet.h
+	$(CXX) $(CXXFLAGS) -c DisjointSet.cpp
+
+Edge.o: Edge.cpp Edge.h
+	$(CXX) $(CXXFLAGS) -c Edge.cpp
+
+clean:
+	rm -f *.o main
